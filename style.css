@@ -27,19 +27,27 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
-    padding: 40px 20px 20px; /* Increased top padding */
+    padding: 40px 20px 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     min-height: 100vh;
     transition: background-color 0.3s ease, color 0.3s ease;
-    box-sizing: border-box; /* Add this line */
-    overflow-y: auto; /* Add this line */
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 h1 {
     color: var(--text-color);
     margin-bottom: 20px;
+    text-align: center;
 }
 
 #taskForm {
@@ -49,7 +57,7 @@ h1 {
     box-shadow: 0 2px 10px var(--form-shadow);
     width: 100%;
     max-width: 400px;
-    margin-bottom: 20px;
+    margin-right: 20px;
 }
 
 #taskInput {
@@ -83,9 +91,9 @@ button:hover {
     list-style-type: none;
     padding: 0;
     width: 100%;
-    max-width: 400px;
-    max-height: calc(100vh - 250px); /* Add this line */
-    overflow-y: auto; /* Add this line */
+    max-width: 600px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
 }
 
 #taskList li {
@@ -216,54 +224,18 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-/* Remove this block as it's no longer needed */
-/*
-em {
-    margin-left: 5px;
-    font-size: 0.8rem;
-}
-*/
-
-@media (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
-    
-    #taskForm, #taskList {
-        width: 100%;
-    }
-    
-    #taskList li {
+@media (max-width: 768px) {
+    .container {
         flex-direction: column;
-        align-items: flex-start;
     }
 
-    .task-buttons {
-        margin-top: 10px;
-        align-self: flex-end;
+    #taskForm {
+        margin-right: 0;
+        margin-bottom: 20px;
+        max-width: 100%;
     }
-}
 
-:root {
-    --bg-color: #f0f0f0;
-    --text-color: #333;
-    --form-bg: #fff;
-    --form-shadow: rgba(0, 0, 0, 0.1);
-    --button-bg: #4CAF50;
-    --button-hover: #45a049;
-    --task-bg: #fff;
-    --task-shadow: rgba(0, 0, 0, 0.12);
-    --completed-color: #888;
-}
-
-.dark-mode {
-    --bg-color: #333;
-    --text-color: #f0f0f0;
-    --form-bg: #444;
-    --form-shadow: rgba(255, 255, 255, 0.1);
-    --button-bg: #5cb85c;
-    --button-hover: #4cae4c;
-    --task-bg: #444;
-    --task-shadow: rgba(255, 255, 255, 0.12);
-    --completed-color: #aaa;
+    #taskList {
+        max-width: 100%;
+    }
 }
