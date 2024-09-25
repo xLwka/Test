@@ -1,9 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
     const taskForm = document.getElementById('taskForm');
     const taskInput = document.getElementById('taskInput');
-    const taskDate = document.getElementById('taskDate');
     const taskList = document.getElementById('taskList');
     const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+
+    // Function to parse date and task from input
+    function parseTaskInput(input) {
+        const dateRegex = /\/(.+?)\\/;
+        const match = input.match(dateRegex);
+        let date = '';
+        let task = input;
+
+        if (match) {
+            date = match[1];
+            task = input.replace(match[0], '').trim();
+        }
+
+        return { task, date };
+    }
 
     // Function to add a task to the UI
     function addTaskToUI(task, date, completed = false) {
@@ -12,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         li.innerHTML = `
             <div class="task-content">
                 <span class="task-text ${completed ? 'completed' : ''}">${task}</span>
-                <span class="task-date">${date}</span>
+                ${date ? `<span class="task-date">${date}</span>` : ''}
             </div>
             <div class="task-buttons">
                 <button class="complete-btn">${completed ? 'Undo' : 'Complete'}</button>
@@ -99,19 +113,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listener for form submission
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const task = taskInput.value.trim();
-        const date = taskDate.value;
+        const inputValue = taskInput.value.trim();
 
-        if (task && date) {
+        if (inputValue) {
+            const { task, date } = parseTaskInput(inputValue);
+            
             // Save task to cookie
             saveTaskToCookie(task, date);
             
             // Add task to UI
             addTaskToUI(task, date, false);
             
-            // Clear input fields
+            // Clear input field
             taskInput.value = '';
-            taskDate.value = '';
         }
     });
 });
