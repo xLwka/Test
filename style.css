@@ -1,24 +1,26 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1 {
-    color: #333;
+    color: var(--text-color);
     margin-bottom: 20px;
 }
 
 #taskForm {
-    background: #fff;
+    background: var(--form-bg);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px var(--form-shadow);
     width: 100%;
     max-width: 400px;
     margin-bottom: 20px;
@@ -28,15 +30,17 @@ h1 {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--completed-color);
     border-radius: 4px;
     font-size: 16px;
+    background-color: var(--form-bg);
+    color: var(--text-color);
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background: #4CAF50;
+    background: var(--button-bg);
     color: white;
     border: none;
     border-radius: 4px;
@@ -46,7 +50,7 @@ button {
 }
 
 button:hover {
-    background: #45a049;
+    background: var(--button-hover);
 }
 
 #taskList {
@@ -57,11 +61,11 @@ button:hover {
 }
 
 #taskList li {
-    background: #fff;
+    background: var(--task-bg);
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 1px 3px var(--task-shadow);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -70,7 +74,7 @@ button:hover {
 
 #taskList li:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px var(--task-shadow);
 }
 
 #taskList li::before {
@@ -80,11 +84,11 @@ button:hover {
 }
 
 #taskList li:not(.completed)::before {
-    color: #888; /* Gray dot for incomplete tasks */
+    color: var(--completed-color);
 }
 
 #taskList li.completed::before {
-    color: #4CAF50; /* Green dot for completed tasks */
+    color: var(--button-bg);
 }
 
 .task-text {
@@ -94,7 +98,7 @@ button:hover {
 
 .task-text.completed {
     text-decoration: line-through;
-    color: #888;
+    color: var(--completed-color);
 }
 
 .task-buttons {
@@ -112,12 +116,12 @@ button:hover {
 }
 
 .complete-btn {
-    background-color: #4CAF50;
+    background-color: var(--button-bg);
     color: white;
 }
 
 .complete-btn:hover {
-    background-color: #45a049;
+    background-color: var(--button-hover);
 }
 
 .delete-btn {
@@ -127,6 +131,66 @@ button:hover {
 
 .delete-btn:hover {
     background-color: #d32f2f;
+}
+
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+}
+
+input:checked + .slider {
+    background-color: var(--button-bg);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+em {
+    margin-left: 10px;
+    font-size: 1rem;
 }
 
 @media (max-width: 480px) {
@@ -147,4 +211,28 @@ button:hover {
         margin-top: 10px;
         align-self: flex-end;
     }
+}
+
+:root {
+    --bg-color: #f0f0f0;
+    --text-color: #333;
+    --form-bg: #fff;
+    --form-shadow: rgba(0, 0, 0, 0.1);
+    --button-bg: #4CAF50;
+    --button-hover: #45a049;
+    --task-bg: #fff;
+    --task-shadow: rgba(0, 0, 0, 0.12);
+    --completed-color: #888;
+}
+
+.dark-mode {
+    --bg-color: #333;
+    --text-color: #f0f0f0;
+    --form-bg: #444;
+    --form-shadow: rgba(255, 255, 255, 0.1);
+    --button-bg: #5cb85c;
+    --button-hover: #4cae4c;
+    --task-bg: #444;
+    --task-shadow: rgba(255, 255, 255, 0.12);
+    --completed-color: #aaa;
 }

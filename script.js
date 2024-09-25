@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskForm = document.getElementById('taskForm');
     const taskInput = document.getElementById('taskInput');
     const taskList = document.getElementById('taskList');
+    const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
 
     // Function to add a task to the UI
     function addTaskToUI(task, completed = false) {
@@ -65,6 +66,27 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadTasksFromCookie() {
         let tasks = JSON.parse(Cookies.get('tasks') || '[]');
         tasks.forEach(task => addTaskToUI(task.text, task.completed));
+    }
+
+    // Function to switch theme
+    function switchTheme(e) {
+        if (e.target.checked) {
+            document.documentElement.setAttribute('class', 'dark-mode');
+            Cookies.set('theme', 'dark', { expires: 365 });
+        } else {
+            document.documentElement.setAttribute('class', '');
+            Cookies.set('theme', 'light', { expires: 365 });
+        }    
+    }
+
+    // Event listener for theme switch
+    toggleSwitch.addEventListener('change', switchTheme, false);
+
+    // Check for saved theme preference
+    const currentTheme = Cookies.get('theme');
+    if (currentTheme) {
+        document.documentElement.setAttribute('class', currentTheme === 'dark' ? 'dark-mode' : '');
+        toggleSwitch.checked = currentTheme === 'dark';
     }
 
     // Load existing tasks when the page loads
