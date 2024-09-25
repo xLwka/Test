@@ -38,8 +38,7 @@ body {
 
 .container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -56,12 +55,14 @@ h1 {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px var(--form-shadow);
-    width: 100%;
+    width: 30%;
     max-width: 400px;
-    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-self: flex-start;
+    position: sticky;
+    top: 20px;
 }
 
 #taskInput {
@@ -234,17 +235,18 @@ input:checked + .slider:before {
     }
 
     #taskForm {
-        margin-right: 0;
+        width: 100%;
+        max-width: 100%;
         margin-bottom: 20px;
-        max-width: 100%;
+        position: static;
     }
 
-    #taskList {
-        max-width: 100%;
+    .task-lists-container {
+        width: 100%;
     }
 
-    #taskForm, #taskList {
-        max-width: 100%;
+    .task-toggle {
+        padding-top: 5%;
     }
 }
 
@@ -262,4 +264,44 @@ input:checked + .slider:before {
 .task-date {
     font-size: 0.8em;
     color: var(--completed-color);
+}
+
+.task-lists-container {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+}
+
+.task-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding-top: 15%;
+}
+
+.task-toggle button {
+    padding: 10px 20px;
+    background: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+.task-toggle button.active {
+    background: var(--button-hover);
+}
+
+#taskList, #completedTaskList {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+}
+
+#completedTaskList {
+    display: none;
 }

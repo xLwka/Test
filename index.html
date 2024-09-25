@@ -20,7 +20,14 @@
             <input type="text" id="taskInput" placeholder="Enter a task (use /date\ for custom date)" required>
             <button type="submit">Add Task</button>
         </form>
-        <ul id="taskList"></ul>
+        <div class="task-lists-container">
+            <div class="task-toggle">
+                <button id="showActiveTasks" class="active">Active Tasks</button>
+                <button id="showCompletedTasks">Completed Tasks</button>
+            </div>
+            <ul id="taskList"></ul>
+            <ul id="completedTaskList"></ul>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

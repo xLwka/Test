@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('taskInput');
     const taskList = document.getElementById('taskList');
     const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+    const showActiveTasksBtn = document.getElementById('showActiveTasks');
+    const showCompletedTasksBtn = document.getElementById('showCompletedTasks');
+    const completedTaskList = document.getElementById('completedTaskList');
 
     // Function to parse date and task from input
     function parseTaskInput(input) {
@@ -37,7 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <button class="delete-btn">Delete</button>
             </div>
         `;
-        taskList.prepend(li);
+        
+        if (completed) {
+            completedTaskList.prepend(li);
+        } else {
+            taskList.prepend(li);
+        }
 
         // Add event listeners for complete and delete buttons
         li.querySelector('.complete-btn').addEventListener('click', () => toggleComplete(li, task, date));
@@ -52,6 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
         li.classList.toggle('completed');
         completeBtn.textContent = taskText.classList.contains('completed') ? 'Undo' : 'Complete';
         updateTaskInCookie(task, date);
+
+        // Move the task to the appropriate list
+        if (li.classList.contains('completed')) {
+            completedTaskList.prepend(li);
+        } else {
+            taskList.prepend(li);
+        }
     }
 
     // Function to delete a task
@@ -132,4 +147,22 @@ document.addEventListener('DOMContentLoaded', () => {
             taskInput.value = '';
         }
     });
+
+    // Event listeners for toggle buttons
+    function showActiveTasks() {
+        taskList.style.display = 'block';
+        completedTaskList.style.display = 'none';
+        showActiveTasksBtn.classList.add('active');
+        showCompletedTasksBtn.classList.remove('active');
+    }
+
+    function showCompletedTasks() {
+        taskList.style.display = 'none';
+        completedTaskList.style.display = 'block';
+        showActiveTasksBtn.classList.remove('active');
+        showCompletedTasksBtn.classList.add('active');
+    }
+
+    showActiveTasksBtn.addEventListener('click', showActiveTasks);
+    showCompletedTasksBtn.addEventListener('click', showCompletedTasks);
 });
