@@ -60,8 +60,8 @@ h1 {
     margin-right: 20px;
 }
 
-#taskInput {
-    width: 95%; /* Reduced from 100% */
+#taskInput, #taskDate {
+    width: 95%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid var(--completed-color);
@@ -69,6 +69,10 @@ h1 {
     font-size: 16px;
     background-color: var(--form-bg);
     color: var(--text-color);
+}
+
+#taskDate {
+    cursor: pointer;
 }
 
 button {
@@ -238,4 +242,20 @@ input:checked + .slider:before {
     #taskList {
         max-width: 100%;
     }
+}
+
+.task-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.task-text {
+    margin-bottom: 5px;
+}
+
+.task-date {
+    font-size: 0.8em;
+    color: var(--completed-color);
 }
