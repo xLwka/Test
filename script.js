@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (match) {
             date = match[1];
             task = input.replace(match[0], '').trim();
+        } else {
+            // If no date is provided, use today's date
+            const today = new Date();
+            date = today.toLocaleDateString('en-GB'); // Format: DD/MM/YYYY
         }
 
         return { task, date };

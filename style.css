@@ -61,7 +61,7 @@ h1 {
 }
 
 #taskInput {
-    width: 100%;
+    width: 95%; /* or 90% for an even narrower input */
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid var(--completed-color);
